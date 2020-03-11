@@ -31,5 +31,5 @@ class Solution(object):
 
 case=[2,1,3,5,4]
 t = Solution()
-print t.numTimesAllBlue(case)
+print(t.numTimesAllBlue(case))
 input()
