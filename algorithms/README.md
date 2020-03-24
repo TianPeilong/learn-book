@@ -1,0 +1,2 @@
+- Algorithms, 4th Edition by Robert Sedgewick and Kevin Wayne
+- Code examples written in Python 3.8
