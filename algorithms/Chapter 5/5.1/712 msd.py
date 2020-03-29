@@ -1,29 +1,31 @@
 def sort(strings, lo, hi, pos):
-    r = 256 + 2
-    aux = [''] * (hi - lo + 1)
-    cache = [0] * r
-    sort_strs = strings[lo:hi+1]
-    for s in sort_strs:
+    if lo > hi:
+        return
+    R = 256 + 2
+    counter = [0] * R
+    subStrings = strings[lo:hi+1]
+    aux = [''] * (hi-lo+1)
+    for s in subStrings:
         if pos >= len(s):
-            cache[1] += 1
+            counter[1] += 1
         else:
-            cache[ord(s[pos])+2] += 1
-    for j in range(1, r):
-        cache[j] += cache[j-1]
-    for s in sort_strs:
+            counter[ord(s[pos]) + 2] += 1
+    for i in range(1, R):
+        counter[i] += counter[i-1]
+    for s in subStrings:
         if pos >= len(s):
-            aux[cache[0]] = s
-            cache[0] += 1
+            aux[counter[0]] = s
+            counter[0] += 1
         else:
-            aux[cache[ord(s[pos])+1]] = s
-            cache[ord(s[pos])+1] += 1
+            aux[counter[ord(s[pos])+1]] = s
+            counter[ord(s[pos])+1] += 1
     strings[lo:hi+1] = aux[:]
-    start = lo + cache[1]
-    pos += 1
-    for count in cache[1:]:
+    start = counter[0]
+    npos = pos + 1
+    for count in counter:
         if count > start:
-            sort(strings, start, lo + count -1, pos)
-            start = lo + count
+            sort(strings, lo+start, lo + count - 1, npos)
+            start = count
 
 def msd(strings):
     sort(strings, 0, len(strings)-1, 0)
