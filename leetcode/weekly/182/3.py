@@ -1,3 +1,5 @@
+from typing import List
+
 # Definition for a binary tree node.
 class TreeNode(object):
     def __init__(self, x):
@@ -78,12 +80,7 @@ class Codec:
                 q.append(p.right)
         return root
             
-
-
-        
-
 # Your Codec object will be instantiated and called as such:
 codec = Codec()
-s = '[1,2,3,null,null,4,5]'
-#codec.deserialize(codec.serialize(root))
-print(codec.serialize(codec.deserialize(s)))
+
+#### code here

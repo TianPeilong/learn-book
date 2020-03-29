@@ -1,3 +1,5 @@
+from typing import List
+
 # Definition for a binary tree node.
 class TreeNode(object):
     def __init__(self, x):
@@ -78,12 +80,37 @@ class Codec:
                 q.append(p.right)
         return root
             
-
-
-        
-
 # Your Codec object will be instantiated and called as such:
 codec = Codec()
-s = '[1,2,3,null,null,4,5]'
-#codec.deserialize(codec.serialize(root))
-print(codec.serialize(codec.deserialize(s)))
+
+#### code here
+class Solution:
+    def findGoodStrings(self, n: int, s1: str, s2: str, evil: str) -> int:
+        def get(s1, s2):
+            if len(s1) == 1:
+                return ord(s2) - ord(s1) + 1
+            if s2[0] == s1[0]:
+                return get(s1[1:], s2[1:])
+            a1 = s1[0]
+            for c in range(len(s1)-1):
+                a1 += 'z'
+            a2 = s2[0]
+            for i in range(len(s2)-1):
+                a2 += 'a'
+            return get(s1, a1) + (ord(s2) - ord(s1) - 1)*((26**(len(s1)-1))%(10**9 + 7)) + get(a2,s2)
+
+        if len(evil) == n:
+            if evil < s1 or evil > s2:
+                return get(s1, s2) % (10**9 + 7)
+            else:
+                return (get(s1,evil) + get(evil,s2)-2) % (10**9 + 7)
+        else:
+            eN = len(evil)
+            eCount = 0
+            if evil < s1[:eN] or evil > s2[eN]:
+                return (ord(s2[0])-ord(s1[0])) * self.findGoodStrings(n-1, s1[1:n], s2[1:n], evil)
+        
+        eN = len(s1) - len(evil)
+        eCount = 1 if eN == 0 else (eN + 1) * (26 ** eN)
+    
+
