@@ -1,3 +1,4 @@
-a = ''
-print(a == '\0')
-print(ord('\0'))
+a = 'a:1'
+b = 'b'
+print(a.partition(':'))
+print(b.partition(':'))
