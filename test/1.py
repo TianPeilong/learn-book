@@ -1,7 +1,9 @@
 class A:
-    test = None
+    test = 1
     def __init__(self, t):
-        self.test = t
+        print(self.test)
+        self.test = 2
+
 
 a = A(1)
 print(a.test)
